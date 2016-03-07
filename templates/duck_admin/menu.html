@@ -1,0 +1,65 @@
+
+<div id="top-nav" class="navbar navbar-xs navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <i class="ui-icon-home"></i><a class="navbar-brand" href="/">Accueil</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                        <strong>Bienvenue, paul</strong> <span class="caret"></span></a>
+                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="/account/password/"><i class="fa fa-key"></i> Change Password</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="/logout/"><i class="show-sm fa fa-sign-out"></i><span
+                        class="hide-sm">Déconnexion</span></a></li>
+            </ul>
+            <form method="get" class="top-search-form navbar-form navbar-left" id="g-search">
+                <div class="input-group">
+                    <input name="_q_" class="form-control" type="text">
+                     <span class="input-group-btn">
+                      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-search"></i> Rechercher <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+
+                          <li><a data-action="/duck_inscription/individu/"><i class="fa fa-search"></i> Search Individus</a></li>
+
+                          <li><a data-action="/duck_inscription/wish/"><i class="fa fa-search"></i> Search Voeux</a></li>
+
+                          <li><a data-action="/django_apogee/individu/"><i class="fa fa-search"></i> Search Étudiants</a></li>
+
+                      </ul>
+                    </span>
+                </div>
+            </form>
+            {% for key, value in config.iteritems %}
+                {% if value.type == 'link' %}
+                    <ul class="nav navbar-nav {% if value.class %}navbar-{{ value.class }}{% endif %}">
+                        <li><a href="{{ value.url }}">{{ value.label }}</a></li>
+                    </ul>
+                {% elif value.type == 'dropdown' %}
+                <ul class="nav navbar-nav {% if value.class %}navbar-{{ value.class }}{% endif %}">
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                                        <strong>{{ value.dropdown_label }}</strong> <span class="caret"></span></a>
+                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                                    {% for key, entry in value.entries.iteritems %}
+                                        <li><a href="{{ entry.url }}"><i class="{{ entry.icon }}"></i> {{ entry.label }}</a></li>
+                                    {% endfor %}
+
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+</div>

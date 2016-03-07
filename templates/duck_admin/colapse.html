@@ -1,0 +1,57 @@
+<div id="left-side" class="col-sm-1 col-md-2">
+
+    <div class="panel-group hide-sm nav-sitemenu col-md-2" id="nav-accordion">
+        {% for key, item in config.iteritems %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        <span class="badge badge-info">{{ item.entries|length }}</span>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#nav-accordion"
+                           href="#nav-panel-{{ forloop.counter }}">
+
+                            <i class="{{ item.icon }}"></i>
+
+                            {{ item.group_label }}
+
+                        </a>
+                    </h6>
+                </div>
+            <div id="nav-panel-{{ forloop.counter }}" class="list-group panel-collapse collapse">
+                {% for key, item in item.entries.iteritems %}
+                    <a href="{{ item.url }}" class="list-group-item">
+                    <i class="{{ item.icon }}"></i>
+                    <span>{{ item.label }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <ul class="well nav nav-list nav-sitemenu show-sm">
+        <li class="app_menu">
+            <a href="/"><i class="icon fa-fw fa fa-home"></i></a>
+            <hr/>
+        </li>
+        {% for key, item in config.iteritems %}`
+            <li class="app_menu dropdown-submenu ">
+                <a href="#" class="section">
+                    <i class="icon {{ item.icon }}"></i>
+
+                </a>
+                <hr/>
+                <ul class="dropdown-menu">
+                    {% for item in item.iteritems %}
+                        <li>
+                            <a href="{{ item.url }}">
+                                <i class="{{ item.icon }}"></i>
+                                item.label</a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

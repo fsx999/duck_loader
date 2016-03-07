@@ -1,0 +1,36 @@
+<div id="content-block" class="col-sm-11 col-md-10">
+    <div class="dashboard row">
+        <div class="col-sm-12 column">
+            {% for key, item in config.iteritems %}
+                <div class="panel panel-default widget qbutton">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+
+
+                            <i class='{{ item.icon }}'></i>
+                            {{ item.group_label }}
+
+                        </h3>
+                    </div>
+                    <div class="panel-body ">
+
+
+                        <div class="row">
+                            {% for key, item in item.entries.iteritems %}
+                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                    <a href="{{ item.url }}" class="btn btn-primary btn-quick">
+                                        <i class="{{ item.icon }}"></i>
+                                        <p>{{ item.label }}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

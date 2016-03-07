@@ -1,0 +1,45 @@
+{% load static from staticfiles %}
+{% load duck_loader %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "font-awesome-4.5.0/css/font-awesome.min.css" %}">
+    <link href="/static/xadmin/css/xadmin.main.css" type="text/css" media="screen" rel="stylesheet"/>
+    <link href="/static/xadmin/css/xadmin.plugins.css" type="text/css" media="screen" rel="stylesheet"/>
+    <link href="/static/xadmin/css/xadmin.responsive.css" type="text/css" media="screen" rel="stylesheet"/>
+    <link href="/static/xadmin/css/xadmin.page.dashboard.css" type="text/css" media="screen" rel="stylesheet"/>
+</head>
+<body class="dashboard">
+
+
+{% block content %}
+{% navbar %}
+
+    <div id="body-content" class="clearfix row">
+
+        {% collapse %}
+        {% dashboard %}
+    </div>
+
+
+    <div id="footer">
+        <hr/>
+        <footer class="text-center">
+            <p>&copy; IED 2014ccccc</p>
+        </footer>
+    </div>
+{% endblock %}
+
+<script type="text/javascript" src="{% static "jquery/dist/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "xadmin/js/xadmin.main.js" %} "></script>
+<script type="text/javascript" src="{% static "xadmin/js/xadmin.responsive.js" %} "></script>
+<script type="text/javascript" src="{% static "xadmin/js/xadmin.page.dashboard.js" %} "></script>
+
+</body>
+</html>
