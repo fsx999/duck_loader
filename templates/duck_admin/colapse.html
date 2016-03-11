@@ -1,5 +1,6 @@
-<div id="left-side" class="col-sm-1 col-md-2">
-
+{% if user.is_superuser %}
+  <div id="left-side" class="col-sm-1 col-md-2">
+    {% if user.is_superuser %}
     <div class="panel-group hide-sm nav-sitemenu col-md-2" id="nav-accordion">
         {% for key, item in config.iteritems %}
             <div class="panel panel-default">
@@ -54,4 +55,9 @@
             </li>
         {% endfor %}
     </ul>
+    {% endif %}
 </div>
+{% else %}
+      <div id="left-side" class="col-sm-1 col-md-1">
+    </div>
+{% endif %}
