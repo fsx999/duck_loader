@@ -62,6 +62,7 @@ def dropdown(item, result):
 
 def collapse_item(item, result):
     entries = deepcopy(item['entries'])
+    item['group_label'] = item['group_label'].capitalize()
     if item['group_label'] not in result:
 
         result[item['group_label']] = deepcopy(item)
@@ -72,6 +73,7 @@ def collapse_item(item, result):
 
 def dashboard_item(item, result):
     entries = deepcopy(item['entries'])
+    item['group_label'] = item['group_label'].capitalize()
     if item['group_label'] not in result:
 
         result[item['group_label']] = deepcopy(item)
@@ -89,6 +91,7 @@ def config_colapse():
     for x in config:
         for item in x:
             collapse_item(item, result)
+    result = OrderedDict(sorted(result.iteritems(), key=lambda x: x[0]))
     return result
 
 def config_dashboard():
