@@ -1,7 +1,11 @@
+{% load duck_loader %}
 <div id="content-block" class="col-sm-11 col-md-10">
     <div class="dashboard row">
         <div class="col-sm-12 column">
             {% for key, item in config.iteritems %}
+                {% if user|has_group:item.groups_permissions %}
+
+
                 <div class="panel panel-default widget qbutton">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -17,12 +21,14 @@
 
                         <div class="row">
                             {% for key, item in item.entries.iteritems %}
+                                {% if user|has_group:item.groups_permissions %}
                                 <div class="col-xs-6 col-sm-4 col-md-3">
                                     <a href="{{ item.url }}" class="btn btn-primary btn-quick">
                                         <i class="{{ item.icon }}"></i>
                                         <p>{{ item.label }}</p>
                                     </a>
                                 </div>
+                                {% endif %}
                             {% endfor %}
 
                         </div>
@@ -30,6 +36,7 @@
                     </div>
 
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

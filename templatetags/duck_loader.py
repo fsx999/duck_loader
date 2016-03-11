@@ -6,6 +6,7 @@ from copy import copy, deepcopy
 
 from django import template
 from django.apps import apps
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.shortcuts import render
 from django.template import Context
@@ -125,3 +126,27 @@ def dashboard(context):
     request = context['request']
     config = config_dashboard()
     return mark_safe(render_to_string('duck_admin/dashboard.html', context={'config': config}, request=request))
+
+
+@register.filter(name='has_groups')
+def has_groups(user, group_names):
+    if len(group_names) == 0 or user.is_superuser:
+        return True
+    try:
+        groups = Group.objects.filter(name__in=group_names)
+    except Group.DoesNotExist:
+        return False
+    return True if groups in user.groups.all() else False
+
+@register.filter(name='has_group')
+def has_group(user, group_names):
+    if len(group_names) == 0 or user.is_superuser:
+        return True
+    try:
+        groups = Group.objects.filter(name__in=group_names)
+    except Group.DoesNotExist:
+        return False
+    r = False
+    for g in groups:
+        r = r or (g in user.groups.all())
+    return r
