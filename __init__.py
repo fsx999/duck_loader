@@ -1,4 +1,5 @@
 # coding=utf-8
+import sys
 from django.conf.urls import url, include
 from duck_loader import views
 from django.apps import apps
@@ -18,12 +19,10 @@ def init_bo_url():
     for x in apps.get_app_configs():
         if getattr(x, 'url', None):
             bo_url.append(url(x.url['regex'], staff_member_required(include("{}.{}".format(x.module.__name__, x.url['module_url'])))))
-
     urlpatterns = [
         url(r'^$', staff_member_required(views.AdminView.as_view(), login_url='duck_loader:login')),
         url(r'^login/$', auth_views.login, {"template_name": 'duck_admin/auth/login.html'}, name="login")
     ]
-
     urlpatterns += bo_url
     urlpatterns = [url(r'^', include(urlpatterns, namespace='duck_loader'))]  # ajout du namespace pour eviter les multi login et autres des autres application
     return urlpatterns

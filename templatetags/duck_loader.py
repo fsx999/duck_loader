@@ -104,6 +104,7 @@ def config_dashboard():
     for x in config:
         for item in x:
             dashboard_item(item, result)
+    # result = OrderedDict(sorted(result.iteritems(), key=lambda x: x[0]))
     return result
 
 
