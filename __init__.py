@@ -17,8 +17,8 @@ def init_bo_url():
     bo_url = []
 
     for x in apps.get_app_configs():
-        if getattr(x, 'url', None):
-            bo_url.append(url(x.url['regex'], staff_member_required(include("{}.{}".format(x.module.__name__, x.url['module_url'])))))
+        if getattr(x, 'urls', None):
+            bo_url +=x.urls
     urlpatterns = [
         url(r'^$', staff_member_required(views.AdminView.as_view(), login_url='duck_loader:login')),
         url(r'^login/$', auth_views.login, {"template_name": 'duck_admin/auth/login.html'}, name="login")
