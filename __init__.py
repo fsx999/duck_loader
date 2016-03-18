@@ -23,8 +23,9 @@ def init_bo_url():
         url(r'^$', staff_member_required(views.AdminView.as_view(), login_url='duck_loader:login')),
         url(r'^login/$', auth_views.login, {"template_name": 'duck_admin/auth/login.html'}, name="login")
     ]
-    urlpatterns += bo_url
+
     urlpatterns = [url(r'^', include(urlpatterns, namespace='duck_loader'))]  # ajout du namespace pour eviter les multi login et autres des autres application
+    urlpatterns += bo_url
     return urlpatterns
 
 
